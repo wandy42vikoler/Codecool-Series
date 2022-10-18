@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Shows{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="card">
+{% for show in shows %}
+    <ul>
+    <li id="{{ show.id }}">{{ show.title }}</li>
+    </ul>
+    {% endfor %}
+    </div>
+    <div class="card" id="table">
+
+    </div>
+    <script src="/static/js/shows.js"></script>
+{% endblock %}

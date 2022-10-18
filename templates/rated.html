@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Shows{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+
+    <h1 class="title text-center">Shows</h1>
+    <div class="card">
+        {% if order %}
+            {% if pagination == 0 %}
+            <a href="#"><<</a>
+        {% else  %}
+            <a href="{{ url_for('most_rated', pagination = pagination - 15, order_by=by, desc=order) }}"><<</a>
+        {% endif %}
+        <a href="{{ url_for('most_rated', pagination = 0, order_by=by, desc=order) }}">1</a>
+        <a href="{{ url_for('most_rated', pagination = 15, order_by=by, desc=order) }}">2</a>
+        <a href="{{ url_for('most_rated', pagination = 30, order_by=by, desc=order) }}">3</a>
+        <a href="{{ url_for('most_rated', pagination = 45, order_by=by, desc=order) }}">4</a>
+        <a href="{{ url_for('most_rated', pagination = 60, order_by=by, desc=order) }}">5</a>
+        <a href="{{ url_for('most_rated', pagination = 75, order_by=by, desc=order) }}">6</a>
+        <a href="{{ url_for('most_rated', pagination = 90, order_by=by, desc=order) }}">7</a>
+        <a href="{{ url_for('most_rated', pagination = 105, order_by=by, desc=order) }}">8</a>
+         {% if pagination == 33 %}
+            <a href="#">>></a>
+        {% else  %}
+            <a href="{{ url_for('most_rated', pagination = pagination + 15, order_by=by, desc=order) }}">>></a>
+        {% endif %}
+        {% else %}
+        {% if pagination == 0%}
+            <a href="#"><<</a>
+        {% else  %}
+            <a href="{{ url_for('most_rated', pagination = pagination - 15) }}"><<</a>
+        {% endif %}
+        <a href="{{ url_for('most_rated', pagination = 0) }}">1</a>
+        <a href="{{ url_for('most_rated', pagination = 15) }}">2</a>
+        <a href="{{ url_for('most_rated', pagination = 30) }}">3</a>
+        <a href="{{ url_for('most_rated', pagination = 45) }}">4</a>
+        <a href="{{ url_for('most_rated', pagination = 60) }}">5</a>
+        <a href="{{ url_for('most_rated', pagination = 75) }}">6</a>
+        <a href="{{ url_for('most_rated', pagination = 90) }}">7</a>
+        <a href="{{ url_for('most_rated', pagination = 105) }}">8</a>
+         {% if pagination == 33 %}
+            <a href="#">>></a>
+        {% else  %}
+            <a href="{{ url_for('most_rated', pagination = pagination + 15) }}">>></a>
+        {% endif %}
+        {% endif %}
+        <table>
+            <thead>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Runtime (min)</th>
+                <th>Rating</th>
+                <th>Genres</th>
+                <th>Trailer</th>
+                <th>Homepage</th>
+            </thead>
+            <tbody>
+                {% for show in shows %}
+                <tr>
+                    <td><a href="{{ url_for('show',id=show.id) }}">{{ show.title }}</a></td>
+                    <td>{{ show.year }}</td>
+                    <td>{{ show.runtime }}</td>
+                    <td>"{{ show.rating }}"</td>
+                    <td>{{ show.genre }}</td>
+                    {% if show.trailer %}
+                    <td><a href="{{ show.trailer }}">{{ show.trailer }}</a></td>
+                    {% else %}
+                    <td> No URL </td>
+                    {% endif %}
+                    {% if show.homepage %}
+                    <td><a href="{{ show.homepage }}">{{ show.homepage }}</a></td>
+                    {% else %}
+                    <td> No Homepage </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/handler.js') }}"></script>
+{% endblock %}

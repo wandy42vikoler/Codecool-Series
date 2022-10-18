@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} Show Characters {% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+    <h1> Show Characters</h1>
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Character Name</th>
+                    <th>Actor Name</th>
+                    <th>Birthdate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for char in characters %}
+                    <td>{{ char.character_name }}</td>
+                    <td>{{ char.name }}</td>
+                    <td>{{ char.birthday }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    <button id="{{ id }}">Show Trailer</button>
+    </div>
+
+    <div class="card" id="trailer">
+
+    </div>
+
+
+<script src="/static/js/trailer.js"></script>
+
+{% endblock %}
